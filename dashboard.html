@@ -413,7 +413,7 @@
 
     // --- Utility Functions ---
     function getCssVar(variableName) {
-        // Removes potential quotes from CSS variable string values (e.g., for colors)
+        
         return getComputedStyle(document.documentElement).getPropertyValue(variableName).trim().replace(/'/g, '');
     }
 
@@ -425,7 +425,7 @@
             { value: 3, name: 'Elevated', emoji: '😄', color: getCssVar('--mood-color-3') },
             { value: 4, name: 'Optimal', emoji: '🤩', color: getCssVar('--mood-color-4') }
         ];
-        return MOOD_DETAILS.find(m => m.value === moodValue) || MOOD_DETAILS[1]; // Default to 'Stable'
+        return MOOD_DETAILS.find(m => m.value === moodValue) || MOOD_DETAILS[1]; 
     }
 
     function getDailyCalories(dateStr, data) {
@@ -444,23 +444,23 @@
         return dateObj.toISOString().split('T')[0];
     }
 
-    // --- UI Element Generation ---
+    // UI Element
     function createDNARungs() {
         if (!dnaSpinner) return;
-        dnaSpinner.querySelectorAll('.dna-rung').forEach(rung => rung.remove()); // Clear existing rungs
+        dnaSpinner.querySelectorAll('.dna-rung').forEach(rung => rung.remove()); 
         const numRungs = 10; // Number of rungs in the DNA visual
         for (let i = 0; i < numRungs; i++) {
             const rung = document.createElement('div');
             rung.classList.add('dna-rung');
-            const yPos = (i / (numRungs -1)) * 90 + 5; // Distribute rungs vertically
-            const rotation = i * (360 / numRungs) * 0.5; // Stagger rotation for helix effect
+            const yPos = (i / (numRungs -1)) * 90 + 5; 
+            const rotation = i * (360 / numRungs) * 0.5; 
             rung.style.top = `${yPos}%`;
             rung.style.transform = `translate(-50%, -50%) rotateY(${rotation}deg) translateZ(0px)`;
             dnaSpinner.appendChild(rung);
         }
     }
 
-    // --- Calendar Logic ---
+    // --- Calendar ---
     function updateCalendarEventDays() {
         calendarEventDays = {};
         sortedUniqueDates.forEach(dateStr => { calendarEventDays[dateStr] = true; });
@@ -552,7 +552,7 @@
             currentEffectiveDate = todayStr;
             mockDataHelper.textContent = "No Data. Try Sample Data?";
         }
-        // Ensure calendarSelectedDate is a Date object, parsed in local time.
+        
         calendarSelectedDate = new Date(currentEffectiveDate + "T00:00:00");
         calendarDisplayedDate = new Date(calendarSelectedDate.getFullYear(), calendarSelectedDate.getMonth(), 1);
         renderCalendar();
@@ -726,7 +726,7 @@
         const noDataInDatasets = !data || data.datasets.every(ds => ds.data.length === 0);
 
         if (noDataInDatasets) {
-             let noDataMessage = 'No data available for this period.'; // Default message
+             let noDataMessage = 'No data available for this period.'; 
              if (canvasId === 'moodTrendChart') noDataMessage = 'Log mood entries to see your spectrum.';
              else if (canvasId === 'calorieLogChart') noDataMessage = 'Log meals to track energy intake.';
              else if (canvasId === 'weightTrendChart') noDataMessage = 'Log weight to see your progress.';
@@ -738,7 +738,7 @@
         charts[canvasId] = new Chart(canvas.getContext('2d'), {
             type,
             data,
-            options: { ...commonChartOptions, ...customOptions } // Merge common options with custom ones
+            options: { ...commonChartOptions, ...customOptions } 
         });
     }
 
@@ -834,13 +834,13 @@
                     entry.target.classList.add('is-visible');
                 }
             });
-        }, { threshold: 0.1 }); // Widget becomes visible when 10% is in view
+        }, { threshold: 0.1 }); 
         widgets.forEach(widget => { observer.observe(widget); });
     }
 
     // --- Initialization ---
     document.addEventListener('DOMContentLoaded', () => {
-        // Set Chart.js global defaults
+        
         Chart.defaults.font.family = getCssVar('--font-family');
         Chart.defaults.font.weight = '300';
         Chart.defaults.color = getCssVar('--text-muted');
