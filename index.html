@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VitalSphere - Your Health Dashboard</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="dashboard-container">
+        <header class="dashboard-header">
+            <h1>Your Health Dashboard <span style="font-size: 0.7em; vertical-align: middle;">🧬</span></h1>
+            <div class="calendar-widget">
+                <div class="calendar-header">
+                    <span class="month-year" id="monthYear">Loading...</span>
+                    <div class="nav-buttons">
+                        <button id="prevMonth" aria-label="Previous month"><</button>
+                        <button id="nextMonth" aria-label="Next month">></button>
+                    </div>
+                </div>
+                <div class="days-of-week">
+                    <div>SUN</div><div>MON</div><div>TUE</div><div>WED</div><div>THU</div><div>FRI</div><div>SAT</div>
+                </div>
+                <div class="calendar-dates" id="calendarDates"></div>
+            </div>
+        </header>
+
+        <div class="dashboard-grid">
+            <div class="widget vital-signs-widget">
+                <div class="widget-header">
+                    <i class="fas fa-dna"></i>
+                    <span class="widget-title">Core Vitals</span>
+                </div>
+                <p class="widget-description">Holistic view of your physiological and emotional state for the selected day, anchored by your unique biological rhythm.</p>
+                <div class="widget-content">
+                    <div class="dna-visual-container">
+                        <div class="dna-spinner" id="dnaSpinner">
+                            <div class="dna-strand s1"></div>
+                            <div class="dna-strand s2"></div>
+                        </div>
+                    </div>
+                    <div class="vitals-grid-container">
+                        <div id="currentVitalsContent" class="vitals-grid">
+                            <p class="no-data-message">Awaiting your vital signs...</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="widget mood-over-time">
+                <div class="widget-header"><i class="far fa-smile-beam"></i> <span class="widget-title">Emotional Spectrum</span></div>
+                <p class="widget-description">Visualize your mood fluctuations over the past seven days, painting a picture of your emotional well-being.</p>
+                <div class="widget-content">
+                    <div class="chart-container">
+                        <canvas id="moodTrendChart"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <div class="widget calorie-log">
+                <div class="widget-header"><i class="fas fa-utensils"></i> <span class="widget-title">Energy Intake</span></div>
+                <p class="widget-description">Track your daily caloric consumption. Bars turn red if you exceed your target for the selected period.</p>
+                <div class="widget-content">
+                    <div class="chart-container">
+                        <canvas id="calorieLogChart"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <div class="widget weight-journey">
+                <div class="widget-header"><i class="fas fa-weight-scale"></i> <span class="widget-title">Mass Index</span></div>
+                <p class="widget-description">Monitor your weight trend. A visual representation of your journey towards your mass goals.</p>
+                <div class="widget-content">
+                    <div class="chart-container">
+                        <canvas id="weightTrendChart"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <div class="widget hydration-habits">
+                <div class="widget-header"><i class="fas fa-glass-water-droplet"></i> <span class="widget-title">Fluid Balance</span></div>
+                <p class="widget-description">Observe your daily water intake. Staying hydrated is key to overall health and energy.</p>
+                <div class="widget-content">
+                    <div class="chart-container">
+                        <canvas id="waterIntakeChart"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <div class="widget streaks">
+                <div class="widget-header"><i class="fas fa-medal"></i> <span class="widget-title">Consistency Metrics</span></div>
+                <p class="widget-description">Celebrate your dedication! Track consecutive days of positive mood and meeting energy targets.</p>
+                <div class="widget-content">
+                    <div id="streaksContent" class="streaks-container">
+                         <p class="no-data-message">Let's build some streaks!</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <p class="small-text">
+            <span id="mockDataHelper">See an Example with Sample Data</span>
+        </p>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns/dist/chartjs-adapter-date-fns.bundle.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
